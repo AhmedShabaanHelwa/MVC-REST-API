@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC REST API", "MVC REST API\MVC REST API.csproj", "{004D7C69-55EA-4368-ABB6-C07713C98DF3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{004D7C69-55EA-4368-ABB6-C07713C98DF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{004D7C69-55EA-4368-ABB6-C07713C98DF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{004D7C69-55EA-4368-ABB6-C07713C98DF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{004D7C69-55EA-4368-ABB6-C07713C98DF3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {90C2ED26-4F77-4232-BE73-43C0BEE6C109}
+	EndGlobalSection
+EndGlobal
