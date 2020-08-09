@@ -9,8 +9,8 @@ namespace S2E3.Data
     public interface ICommanderRepo
     {
         //Operation 1: Get All Commands
-        public IEnumerable<Command> GetAppCommands();
+        public IEnumerable<Command> GetAll();
         //Operation 2: Get a command by Id
-        public Command GetCommandById(int id);
+        public Command GetById(int id);
     }
 }

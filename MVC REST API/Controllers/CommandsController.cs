@@ -25,7 +25,7 @@ namespace S2E3.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Command>> GetAllCommands()
         {
-            var commands = _repo.GetAppCommands();
+            var commands = _repo.GetAll();
             return Ok(commands);
             //Errors need to be handled
         }
@@ -34,7 +34,7 @@ namespace S2E3.Controllers
         [HttpGet("{id}")]
         public ActionResult<Command> GetCommandById(int id)
         {
-            var command = _repo.GetCommandById(id);
+            var command = _repo.GetById(id);
 
             return Ok(command);
         }

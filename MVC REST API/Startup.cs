@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MVC_REST_API.Data;
 using S2E3.Data;
 
 namespace S2E3
@@ -26,9 +28,17 @@ namespace S2E3
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //!AhmedShaban: Adding Controllers without View support
             services.AddControllers();
-            //Injecting the Repository pattern service
-            services.AddScoped<ICommanderRepo, MockCommanderRepo>();
+            //!AhmedShaban: Adding the datacontext service
+            services.AddDbContext<CommanderContext>(
+                opt =>
+                {
+                    opt.UseSqlServer(Configuration.GetConnectionString("CommanderConnection"));
+                }
+            );
+            //!Ahmedshaban: Injecting the Repository pattern service
+            services.AddScoped<ICommanderRepo, SqlCommanderRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
