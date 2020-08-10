@@ -36,7 +36,7 @@ namespace S2E3.Controllers
         }
 
         //GET api/Commands/{id}
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetCommandById")]
         public ActionResult<CommandReadDto> GetCommandById(int id)
         {
             var command = _repo.GetById(id);
@@ -46,6 +46,41 @@ namespace S2E3.Controllers
                 return Ok(_mapper.Map<CommandReadDto>(command));
             }
             else 
+            {
+                return NotFound();
+            }
+        }
+
+
+        //POST api/commands
+        [HttpPost]
+        public ActionResult<CommandReadDto> CreateCommand(CommandCreateDto commandCreateDto)
+        {
+            //!AhmedShaban: Map the DTO to Command
+            var commandModel = _mapper.Map<Command>(commandCreateDto);
+            //!AhmedShaban: Add the new command (object) in the context
+            _repo.AddCommand(commandModel);
+            //!AhmedShaban: Save the context to Database
+            _repo.Save();
+
+            var commandReadDto = _mapper.Map<CommandReadDto>(commandModel);
+
+            return CreatedAtRoute(nameof(GetCommandById), new { Id = commandReadDto.Id},commandReadDto);
+        }
+
+        //DELETE api/commands/{id}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteCommandById(int id)
+        {
+            var commandModelFromRepo = _repo.GetById(id);
+
+            if (commandModelFromRepo != null)
+            {
+                _repo.DeleteCommand(commandModelFromRepo);
+                _repo.Save();
+                return NoContent();
+            }
+            else
             {
                 return NotFound();
             }

@@ -6,10 +6,11 @@ namespace MVC_REST_API.Profiles
 {
     public class CommandsProfile : Profile
     {
-        //!AhmedShaban: Just creat Create map
+        //!AhmedShaban: Just creat Create maps
         public CommandsProfile()
         {
             CreateMap<Command, CommandReadDto>();
+            CreateMap<CommandCreateDto, Command>();
         }
     }
 }
