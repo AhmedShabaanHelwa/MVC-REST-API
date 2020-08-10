@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -37,7 +38,9 @@ namespace S2E3
                     opt.UseSqlServer(Configuration.GetConnectionString("CommanderConnection"));
                 }
             );
-            //!Ahmedshaban: Injecting the Repository pattern service
+            //!AhmedShaban: Add Automapper
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            //!AhmedShaban: Injecting the Repository pattern service
             services.AddScoped<ICommanderRepo, SqlCommanderRepo>();
         }
 

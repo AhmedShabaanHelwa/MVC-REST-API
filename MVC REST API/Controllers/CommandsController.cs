@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using MVC_REST_API.DTOs;
 using S2E3.Data;
 using S2E3.Models;
 using System;
@@ -12,31 +14,41 @@ namespace S2E3.Controllers
     [ApiController]
     public class CommandsController : ControllerBase
     {
+        //!AhmedShaban: Dependency Injection section
         private readonly ICommanderRepo _repo;
+        private readonly IMapper _mapper;
 
         //private MockCommanderRepo _repo = new MockCommanderRepo();
 
-        public CommandsController(ICommanderRepo repo)
+        public CommandsController(ICommanderRepo repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
         //GET api/Commands
         [HttpGet]
-        public ActionResult<IEnumerable<Command>> GetAllCommands()
+        public ActionResult <IEnumerable<CommandReadDto>> GetAllCommands()
         {
             var commands = _repo.GetAll();
-            return Ok(commands);
+            return Ok(_mapper.Map< IEnumerable<CommandReadDto> >(commands));
             //Errors need to be handled
         }
 
         //GET api/Commands/{id}
         [HttpGet("{id}")]
-        public ActionResult<Command> GetCommandById(int id)
+        public ActionResult<CommandReadDto> GetCommandById(int id)
         {
             var command = _repo.GetById(id);
 
-            return Ok(command);
+            if (null != command)
+            {
+                return Ok(_mapper.Map<CommandReadDto>(command));
+            }
+            else 
+            {
+                return NotFound();
+            }
         }
     }
 }
